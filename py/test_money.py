@@ -1,3 +1,5 @@
+import functools
+import operator
 import unittest
 
 
@@ -15,6 +17,17 @@ class Money:
     def divide(self, divisor):
         return Money(self.amount / divisor, self.currency) 
 
+
+class Portfolio:
+    def __init__(self):
+        self.moneys = []
+
+    def add(self, *moneys):
+        self.moneys.extend(moneys)
+
+    def evaluate(self, currency):
+        total = functools.reduce(operator.add, map(lambda m: m.amount, self.moneys), 0)
+        return Money(total, currency)
 
 class TestMoney(unittest.TestCase):
     # 테스트 메소드로 인정되기 위해 메소드 이름은 test로 시작해야 함
@@ -36,6 +49,15 @@ class TestMoney(unittest.TestCase):
         original_money = Money(4002, 'KRW')
         actual_money_after_division = Money(1000.5, 'KRW')
         self.assertEqual(original_money.divide(4), actual_money_after_division)
+
+    # 5 USD + 10 EUR = 17 USD
+    def test_addition(self):
+        five_dollars = Money(5, "USD")
+        ten_dollars = Money(10, "USD")
+        fifteen_dollars = Money(15, "USD")
+        portfolio = Portfolio()
+        portfolio.add(five_dollars, ten_dollars)
+        self.assertEqual(fifteen_dollars, portfolio.evaluate('USD'))
 
 if __name__ == "__main__":
     unittest.main()
