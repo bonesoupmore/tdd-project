@@ -1,50 +1,14 @@
-import functools
-import operator
 import unittest
 
-
-class Money:
-    def __init__(self, amount, currency):
-        self.amount = amount
-        self.currency = currency
-
-    def __eq__(self, other):
-        return self.amount == other.amount and self.currency == other.currency
-
-    def times(self, multiplier):
-        return Money(self.amount * multiplier, self.currency)
-
-    def divide(self, divisor):
-        return Money(self.amount / divisor, self.currency)
-
-
-class Portfolio:
-    def __init__(self):
-        self.moneys = []
-
-    def add(self, *moneys):
-        self.moneys.extend(moneys)
-
-    def evaluate(self, currency):
-        total = functools.reduce(
-            operator.add,
-            map(lambda m: m.amount, self.moneys),
-            0,
-        )
-        return Money(total, currency)
+from money import Money
+from portfolio import Portfolio
 
 
 class TestMoney(unittest.TestCase):
     # 테스트 메소드로 인정되기 위해 메소드 이름은 test로 시작해야 함
 
-    # 5 USD x 2 = 10 USD
-    def test_multiplication_in_dollars(self):
-        five_dollars = Money(5, "USD")
-        ten_dollars = Money(10, "USD")
-        self.assertEqual(five_dollars.times(2), ten_dollars)
-
     # 10 EUR x 2 = 20 EUR
-    def test_multiplication_in_euros(self):
+    def test_multiplication(self):
         ten_euros = Money(10, "EUR")
         twenty_euros = Money(20, "EUR")
         self.assertEqual(ten_euros.times(2), twenty_euros)
