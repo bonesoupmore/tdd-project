@@ -28,6 +28,7 @@ class TestMoney(unittest.TestCase):
         portfolio.add(five_dollars, ten_dollars)
         self.assertEqual(fifteen_dollars, portfolio.evaluate("USD"))
 
+    # 5 USD + 10 EUR = 17 USD
     def test_addition_of_dollars_and_euros(self):
         five_dollars = Money(5, "USD")
         ten_euros = Money(10, "EUR")
