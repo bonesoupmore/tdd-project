@@ -1,6 +1,6 @@
 # tdd-project
 
-- Features
+### Features
   - 5 USD x 2 = 10 USD
   - 10 EUR x 2 = 20 EUR
   - 4002 KRW / 4 = 1000.5 KRW
