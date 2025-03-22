@@ -51,6 +51,7 @@ class MoneyTest {
     assert.deepStrictEqual(portfolio.evaluate('KRW'), expectedValue);
   }
 
+  // 환율이 명시되지 않은 경우 오류 처리 개선
   testAdditionWithMultipleMissingExchangeRates() {
     const oneDollar = new Money(1, 'USD');
     const oneEuro = new Money(1, 'EUR');

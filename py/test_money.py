@@ -56,6 +56,7 @@ class TestMoney(unittest.TestCase):
             f"{expected_value} != {actual_value}",
         )
 
+    # 환율이 명시되지 않은 경우 오류 처리 개선
     def test_addition_with_multiple_missing_exchange_rates(self):
         one_dollar = Money(1, "USD")
         one_euro = Money(1, "EUR")
